@@ -99,17 +99,26 @@ public class Crc32 : HashAlgorithm
 }
 "@
 
-# Compute CRC32 and handle any runtime errors
 try {
     $crc32 = [Crc32]::Compute($Path)
     $formatted = "{0:X8}" -f $crc32
     Set-Clipboard $formatted
-    [System.Windows.Forms.MessageBox]::Show("CRC32: $formatted`n(copied to clipboard)", "CRC32 Hash")
+
+    # Extract file details
+    $directory = [System.IO.Path]::GetDirectoryName($Path)
+    $filename = [System.IO.Path]::GetFileNameWithoutExtension($Path)
+    $extension = [System.IO.Path]::GetExtension($Path)
+
+    # New file name with CRC appended
+    $newFileName = "$filename`_$formatted$extension"
+    $newPath = Join-Path $directory $newFileName
+
+    # Check if new path already exists
+    if (-not (Test-Path -LiteralPath $newPath)) {
+        Rename-Item -LiteralPath $Path -NewName $newFileName
+    } else {
+        [System.Windows.Forms.MessageBox]::Show("CRC32: $formatted`nBut could not rename:`n$newFileName already exists.`n(copied to clipboard)", "CRC32 Hash", 'OK', 'Warning')
+    }
 } catch {
     [System.Windows.Forms.MessageBox]::Show("Error: " + $_.Exception.Message, "CRC32 Error", 'OK', 'Error')
 }
-finally {
-    # Clean up the loaded assembly
-    [System.AppDomain]::CurrentDomain.Load("Crc32").Unload()
-}
-# End of script
