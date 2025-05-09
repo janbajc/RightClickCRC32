@@ -20,9 +20,10 @@ Step 1: Download the Script
     @="Copy CRC32"
 
     [HKEY_CLASSES_ROOT\*\shell\Copy CRC32\command]
-    @="powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"C:\\Path\\To\\calcCRC32.ps1\" \"%1\""
+        
+        powershell.exe -ExecutionPolicy Bypass -File "C:\Path\to\calcCRC32.ps1" "%1"
 
-    Replace C:\\Path\\To\\calcCRC32.ps1 with the actual path to the calcCRC32.ps1 script.
+    Replace C:\Path\To\calcCRC32.ps1 with the actual path to the calcCRC32.ps1 script.
 
 Step 3: Running the Script
 
