@@ -1,34 +1,34 @@
-CRC32 Calculator for Windows Right-Click
+# 🧮 CRC32 Checksum Right-Click Tool for Windows
 
-This script calculates the CRC32 checksum of a file and copies the result to the clipboard, providing an easy way to check the integrity of files via the Windows right-click context menu.
-Features:
+Easily calculate the CRC32 checksum of any file directly from the Windows Explorer context menu. The result is appended to the end of the selected file's name. Supports multi-file selection.
 
-    Calculate CRC32 checksum of any file.
+---
 
-    Automatically copy the CRC32 value to the clipboard.
+## ✅ Features
 
-    Display the checksum in a message box.
+* **One-click CRC32 calculation** via the Windows right-click menu  
+* **Automatically appends** the calculated checksum to the filename  
 
-Installation:
-Step 1: Download the Script
+---
 
-    Download calcCRC32.ps1 from this repository or copy the script provided.
+## 🔧 Setup Instructions
 
-    Save the file to your desired location, e.g., C:\Scripts\calcCRC32.ps1.
+### 1. Install the script
 
-    [HKEY_CLASSES_ROOT\*\shell\Copy CRC32]
-    @="Copy CRC32"
+* `git clone` the repo.
+* Run `install-context-menu.bat`. Ensure the folder and its files are in their final location. The script uses its current path to register the context menu.
 
-    [HKEY_CLASSES_ROOT\*\shell\Copy CRC32\command]
-        
-        powershell.exe -ExecutionPolicy Bypass -File "C:\Path\to\calcCRC32.ps1" "%1"
+---
 
-    Replace C:\Path\To\calcCRC32.ps1 with the actual path to the calcCRC32.ps1 script.
+## ▶️ How to Use
 
-Step 3: Running the Script
+1. Right-click on any file(s) in File Explorer.  
+2. Click **Add CRC32 to Filename**.  
+3. The checksum will be **automatically appended** to the end of each selected file's name.
 
-    Right-click any file in Windows Explorer.
+---
 
-    Select "Copy CRC32" from the context menu.
+## 📎 Tips
 
-    The CRC32 value will be calculated and copied to your clipboard.
+* Use this tool for verifying file integrity, comparing against known hashes, or quick checksum generation.
+* For batch processing or alternative hash types (e.g., MD5, SHA256), the script can be extended easily.
